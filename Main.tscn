@@ -16,6 +16,7 @@ ambient_light_color = Color( 1, 1, 1, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 acceleration = 30.0
+dash_multiplier = 10.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 2, 0, 0, 0, 0.1, 0, 0, 0, 2, 0, -0.1, 0 )
