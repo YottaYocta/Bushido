@@ -28,6 +28,36 @@ flags = 19
 atlas = ExtResource( 1 )
 region = Rect2( 256, 256, 64, 32 )
 
+[sub_resource type="AtlasTexture" id=30]
+flags = 19
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 19
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 19
+atlas = ExtResource( 1 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 19
+atlas = ExtResource( 1 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 19
+atlas = ExtResource( 1 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 19
+atlas = ExtResource( 1 )
+region = Rect2( 160, 32, 32, 32 )
+
 [sub_resource type="AtlasTexture" id=13]
 flags = 19
 atlas = ExtResource( 1 )
@@ -113,36 +143,6 @@ flags = 19
 atlas = ExtResource( 1 )
 region = Rect2( 256, 192, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=30]
-flags = 19
-atlas = ExtResource( 1 )
-region = Rect2( 0, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=31]
-flags = 19
-atlas = ExtResource( 1 )
-region = Rect2( 32, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=32]
-flags = 19
-atlas = ExtResource( 1 )
-region = Rect2( 64, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=33]
-flags = 19
-atlas = ExtResource( 1 )
-region = Rect2( 96, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=34]
-flags = 19
-atlas = ExtResource( 1 )
-region = Rect2( 128, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=35]
-flags = 19
-atlas = ExtResource( 1 )
-region = Rect2( 160, 32, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=36]
 flags = 19
 atlas = ExtResource( 1 )
@@ -185,15 +185,15 @@ animations = [ {
 "name": "dash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "die",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
 "loop": true,
 "name": "run",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "die",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ) ],
 "loop": true,
@@ -214,7 +214,6 @@ animation = "dash"
 
 [node name="InterpolatedCamera" type="InterpolatedCamera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866026, 0, 2, 4 )
-projection = 1
 size = 4.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
