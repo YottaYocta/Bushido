@@ -1,42 +1,68 @@
-extends Spatial
+extends KinematicBody
 
-var velocity := Vector3()
-var dash_dir := Vector3()
-export var acceleration := 1.0
-export var dash_multiplier := 6.0
-export var friction_coefficient := 5.0
+enum PLAYER_STATE {
+	MOVEMENT,
+	DASH,
+	DIE
+}
+
+var state: int = PLAYER_STATE.MOVEMENT
+var velocity := Vector3.ZERO
+var dash_dir := Vector3.RIGHT
+export var gravity := 10.0
+export var acceleration := 10.0
+export var dash_multiplier := 400.0
+export var friction_coefficient := 10.0
+export var vector_threshold := 0.1
 
 func _ready():
+	$AnimatedSprite3D.animation = 'idle'
 	pass # Replace with function body.
 
-
 func _process(delta):
-	if Input.is_action_pressed('ui_left'):
-		velocity.x -= acceleration / 100
-	if Input.is_action_pressed('ui_right'):
-		velocity.x += acceleration / 100
-	if Input.is_action_pressed('ui_up'):
-		velocity.z -= acceleration / 100
-	if Input.is_action_pressed('ui_down'):
-		velocity.z += acceleration / 100
-	if Input.is_action_just_pressed('jump'):
-		velocity = dash_dir.normalized() * dash_multiplier 
+	if state == PLAYER_STATE.MOVEMENT:
+		if Input.is_action_just_pressed('dash'):
+			$AnimatedSprite3D.animation = 'dash'
+			velocity += dash_dir.rotated(Vector3.UP, rotation.y) * dash_multiplier * delta
+			state = PLAYER_STATE.DASH
+		else:
+			var direction := Vector3.ZERO
+			if Input.is_action_pressed('left'):
+				direction.x -= 1
+			if Input.is_action_pressed('right'):
+				direction.x += 1
+			if Input.is_action_pressed('forward'):
+				direction.z -= 1
+			if Input.is_action_pressed('backward'):
+				direction.z += 1
+			
+			# Animation
 
-	velocity -= velocity / friction_coefficient
-	transform.origin += (velocity * delta).rotated(Vector3.UP, deg2rad(rotation_degrees.y))
-	if velocity.length() < 0.01:
-		$AnimatedSprite3D.stop()
-		velocity = Vector3()
-	if velocity.length() > 0.01:
-		dash_dir = velocity.normalized()
-		$AnimatedSprite3D.play()
+			if velocity.length() < vector_threshold:
+				$AnimatedSprite3D.animation = 'idle'
+				velocity = Vector3.ZERO
+			if velocity.length() > vector_threshold:
+				$AnimatedSprite3D.animation = 'run'
+				$AnimatedSprite3D.play()
+			if direction.length() > vector_threshold:
+				dash_dir = direction.normalized()
+
+			if velocity.x < -vector_threshold:
+				$AnimatedSprite3D.flip_h = true
+			elif velocity.x > vector_threshold:
+				$AnimatedSprite3D.flip_h = false
+			
+			direction = direction.rotated(Vector3.UP, rotation.y) * acceleration
+			velocity += direction * delta;
 
 
-	# Animation
+	elif state == PLAYER_STATE.DASH:
+		if velocity.length() < vector_threshold:
+			state = PLAYER_STATE.MOVEMENT
 
-	if velocity.x < -0.01:
-		$AnimatedSprite3D.flip_h = true
-	elif velocity.x > 0.01:
-		$AnimatedSprite3D.flip_h = false
+	velocity -= velocity / friction_coefficient + Vector3(0, gravity, 0) * delta
+	velocity = move_and_slide(velocity, Vector3.UP)
 
-		
+func kill(body):
+	print('hit')
+	transform.origin = Vector3.ZERO + Vector3(0, 1, 0)
