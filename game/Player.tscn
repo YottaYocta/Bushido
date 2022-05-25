@@ -215,7 +215,6 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 shaded = true
-alpha_cut = 2
 frames = SubResource( 11 )
 animation = "dash"
 
@@ -228,7 +227,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.838589, 3.91343 )
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.522976, 2.87567 )
 fov = 52.8
 size = 5.0
 near = 0.01

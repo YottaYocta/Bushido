@@ -27,7 +27,6 @@ animations = [ {
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="0"]
 shaded = true
-alpha_cut = 2
 frames = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="1"]
